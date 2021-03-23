@@ -3,7 +3,7 @@
 //exercise 3 question 1 
 #include <iostream>
 #include <cmath>
-#include"rational.h"
+#include"Rational.h"
 using namespace std;
 Rational::Rational(int x = 1, int y = 1)
 {
