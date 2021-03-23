@@ -17,7 +17,7 @@ public:
 	int getNumerator();                             //function that returns the value of the Numerator
 	
 	void print();                                   //print function
-	bool equal(Rational);                           //function that checks if the numbers are equal or not
+	//bool equal(Rational);                           //function that checks if the numbers are equal or not
 	//Rational add(Rational);                         //dfunction that returns the sum of to rational numbers
 	Rational operator+(const Rational& r)const;   //function that retunrning the sum of two numbers
 	Rational operator-(const Rational& r) const;
