@@ -3,51 +3,57 @@
 //exercise 3 question 1 
 #include <iostream>
 #include <cmath>
-#include"Rational.h"
+#include"rational.h"
 using namespace std;
-Rational::Rational(int x = 1, int y = 1)
+Rational::Rational(int x, int y)
 {
 	numerator = x;
-	denominator = y;
-	if (denominator == 0)
+	if (y == 0)
 	{
-		denominator = 1;
 		cout << "ERROR\n";
+		denominator = 1;
 	}
+	else
+		denominator = y;
 }
+
 Rational::Rational(const Rational& r)        //copy constructor
 {
 	denominator = r.denominator;
 	numerator = r.numerator;
 }
+
 void Rational::print()                                    //print function
 {
 	rationalReduction();
 	if (denominator == 1 || numerator == 0)
 		cout << numerator;
 	else
-	{
 		cout << numerator << '/' << denominator << " ";
-	}
 }
+
 void Rational::setNumerator(int x)
 {
 	numerator = x;
 }
+
 int Rational::getNumerator()
 {
 	return numerator;
 }
+
 void Rational::setDenominator(int y)               //function that sets the value of the denmoinator
 {
 	denominator = y;
 	if (y == 0)                                    //if the number is 0 the function sets instaead 1
 		denominator = 1;
 }
+
 int Rational::getDenominator()
 {
 	return denominator;
 }
+
 void Rational::rationalReduction()          //function that reduces the fraction
 {
 	int i;
@@ -78,7 +84,7 @@ void Rational::rationalReduction()          //function that reduces the fraction
 		}
 	}
 }
-bool Rational::equal(Rational x)      //checks if the fractions are equal
+/*bool Rational::equal(Rational x)      //checks if the fractions are equal
 {
 	Rational r1;
 	r1.numerator = numerator;
@@ -94,9 +100,9 @@ bool Rational::equal(Rational x)      //checks if the fractions are equal
 		return true;
 	else
 		return false;
-}
+}*/
 
-Rational Rational::add(Rational y)               //Summed up the two fractions
+/*Rational Rational::add(Rational y)               //Summed up the two fractions
 {
 	Rational sum;
 	Rational r2;
@@ -115,7 +121,8 @@ Rational Rational::add(Rational y)               //Summed up the two fractions
 		sum.rationalReduction();                                                   // //reducing the Fraction
 	}
 	return sum;
-}
+}*/
+
 Rational Rational::operator+(const Rational& r)const
 {
 	int x = numerator * r.denominator + r.numerator * denominator;
@@ -124,7 +131,8 @@ Rational Rational::operator+(const Rational& r)const
 	temp.rationalReduction();
 	return temp;
 }
-Rational Rational:: operator-(Rational r)
+
+Rational Rational:: operator-(const Rational& r) const
 {
 	int x = (numerator * r.getDenominator()) - (r.getNumerator() * denominator);
 	int y = denominator * r.getDenominator();
@@ -132,7 +140,8 @@ Rational Rational:: operator-(Rational r)
 	temp.rationalReduction();
 	return temp;
 }
-Rational Rational::operator*(Rational r)
+
+Rational Rational::operator*(const Rational& r) const
 {
 	int x = numerator * r.getNumerator();
 	int y = denominator * r.getDenominator();
@@ -140,6 +149,7 @@ Rational Rational::operator*(Rational r)
 	tmp.rationalReduction();
 	return tmp;
 }
+
 Rational Rational::operator/(const Rational& r1) const
 {
 	Rational Temporary = *this;
@@ -148,6 +158,7 @@ Rational Rational::operator/(const Rational& r1) const
 	Temporary.rationalReduction();
 	return Temporary;
 }
+
 //Rational Rational ::operator/(const Rational& r)const
 //{
 //	int x = numerator * abs(r.denominator);
@@ -163,33 +174,43 @@ Rational Rational::operator/(const Rational& r1) const
 Rational& Rational:: operator++()
 {
 	numerator += denominator;
+	// Mabye call reduction...
 	return *this;
 }
-Rational Rational:: operator++(int r)
+
+Rational Rational:: operator++(const int r)
 {
 	Rational temp(numerator, denominator);
 	numerator += denominator;
+	// Mabye call reduction...
 	return temp;
 }
+
 Rational Rational:: operator--()
 {
 	numerator -= denominator;
+	// Mabye call reduction...
 	return *this;
 }
+
 Rational Rational:: operator--(int r)
 {
 	Rational temp(numerator, denominator);
 	numerator -= denominator;
+	// Mabye call reduction...
 	return temp;
 }
+
 bool Rational:: operator<=(const Rational& r)const
 {
 	return ((numerator / denominator) <= (r.numerator / r.denominator));
 }
+
 bool Rational:: operator>=(const Rational& r)const
 {
-	return !((numerator / denominator) <= (r.numerator / r.denominator));
+	return ((numerator / denominator) >= (r.numerator / r.denominator));
 }
+
 bool Rational:: operator>(Rational r)
 {
 	return ((numerator / denominator) > (r.numerator / r.denominator));
@@ -199,7 +220,8 @@ bool Rational::operator==(const Rational& r)const
 {
 	return ((numerator == r.numerator) && (denominator == r.denominator));
 }
+
 bool Rational:: operator!=(const Rational& r)const
 {
-	return !(*this == r);
+	return !(*this == r);	// Using '==' operator.
 }
