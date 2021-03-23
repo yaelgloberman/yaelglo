@@ -211,7 +211,12 @@ bool Rational:: operator>=(const Rational& r)const
 	return ((numerator / denominator) >= (r.numerator / r.denominator));
 }
 
-bool Rational:: operator>(Rational r)
+bool Rational:: operator>(const Rational& r) const
+{
+	return ((numerator / denominator) > (r.numerator / r.denominator));
+}
+
+bool Rational:: operator<(const Rational& r) const
 {
 	return ((numerator / denominator) > (r.numerator / r.denominator));
 }
